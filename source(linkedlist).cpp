@@ -826,15 +826,12 @@ int main(){
           remove(path);
           FILE *output = fopen(path, "w");
           saveToFile();
-          int i = 1;
           char c = fgetc(source);
           while (c != EOF){
-            i++;
             fputc(c, output);
             c = fgetc(source);
           }
           system("cls");
-          cout << i;
           cout << "Saved Successfully!\n\n";
           cout << "Press any key to go back to menu...";
           getch();
@@ -863,6 +860,12 @@ int main(){
         cout << endl;
         cout << "Press any key to exit program...";
         saveToFile();
+        Person* freetmp;
+        while( head ){
+          freetmp = head;
+          head = head->next;
+          free(freetmp);
+        }
         getch();
       }
     }
