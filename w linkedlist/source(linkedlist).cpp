@@ -743,7 +743,6 @@ int main(){
           cout << "\t\t\tWhat Do you want to do?\n";
           cout << "\t\t\t1. Restore\t2. Save\n";
           cout << "Enter action: ";
-          char action[2];
           gets(action);
         }
         system("cls");
@@ -758,8 +757,10 @@ int main(){
         char path[10000];
         gets(path);
         FILE *output = fopen(path, "ab+");
+        cout << output;
         FILE *source = fopen(DATABASE, "ab+");
         if( action[0] == 49 && output ){
+
           Data data;
           if ( fread(&data, sizeof(struct Data), 1, output) ){
 
