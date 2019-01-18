@@ -639,7 +639,6 @@ int main(){
 
             while( strlen(placeID) > MAX3 - 1 || ( strlen(placeID) > 1 && !found ) ){
               system("cls");
-              cout << placeID << ":" <<found << endl;
               cout << "\t\t\tAdd New Contact\n";
               cout << "\t\t\tContact Details\n";
               printPerson(person, 0);
