@@ -757,7 +757,6 @@ int main(){
         char path[10000];
         gets(path);
         FILE *output = fopen(path, "ab+");
-        cout << output;
         FILE *source = fopen(DATABASE, "ab+");
         if( action[0] == 49 && output ){
 
