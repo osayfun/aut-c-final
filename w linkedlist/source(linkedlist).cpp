@@ -220,7 +220,6 @@ void searchContact(int type, char input[], bool gender = true){
       cout << "\t\t\tThe Following Users are found. " << allCount - count << " users left" << endl << endl;
       found = true;
       printPerson(temp, count);
-      temp = temp->next;
       if(allCount - count){
 
         cout << "Press any key to see next user...";
@@ -230,6 +229,7 @@ void searchContact(int type, char input[], bool gender = true){
       getch();
       system("cls");
     }
+    temp = temp->next;
   }
   if( !found ){
 
