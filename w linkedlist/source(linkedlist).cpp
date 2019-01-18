@@ -31,6 +31,50 @@ struct Person{
 Person* head = NULL;
 Person* last = NULL;
 
+void saveToFile(){
+  remove(DATABASE);
+  FILE *f = fopen(DATABASE, "w");
+  Person* temp = head;
+  while( temp ){
+    fwrite(&(temp->data), sizeof(struct Data), 1, f);
+    temp = temp->next;
+  }
+  fclose(f);
+}
+
+int saveAtLast(Person *input){
+  if( head == NULL ){
+
+    head = input;
+  }else if( head->next == NULL ){
+
+    head->next = input;
+  }
+  if( last != NULL ){
+    last->next = input;
+  }
+  if ( last = input ){
+
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+void initFile(){
+  head = NULL;
+  last = NULL;
+  Data data;
+  FILE *f = fopen(DATABASE, "r");
+  while( fread(&data, sizeof(struct Data), 1, f) ){
+    Person* temp = (Person *)malloc(sizeof(Person));
+    temp->next = NULL;
+    temp->data = data;
+    saveAtLast(temp);
+  }
+  fclose(f);
+}
+
 void printPerson(Person *person, int record = 0){
   if( record )
     cout << "Record:\t\t" << record << endl;
@@ -251,6 +295,7 @@ void deleteContact(int type, char input[], bool gender = true){
   }else{
     cout << "User deleted successfully! " << count << " record(s) is affected\n\n";
   }
+  saveToFile();
   cout << "Press any key to go back to menu...";
   getch();
 }
@@ -284,25 +329,6 @@ void saveAfter(Person *input, char id[]){
     }
   }else{
     cout << "User is not found\n\n";
-  }
-}
-
-int saveAtLast(Person *input){
-  if( head == NULL ){
-
-    head = input;
-  }else if( head->next == NULL ){
-
-    head->next = input;
-  }
-  if( last != NULL ){
-    last->next = input;
-  }
-  if ( last = input ){
-
-    return 1;
-  }else{
-    return 0;
   }
 }
 
@@ -514,31 +540,6 @@ void secondPage(int type){
   }
 }
 
-void saveToFile(){
-  remove(DATABASE);
-  FILE *f = fopen(DATABASE, "w");
-  Person* temp = head;
-  while( temp ){
-    fwrite(&(temp->data), sizeof(struct Data), 1, f);
-    temp = temp->next;
-  }
-  fclose(f);
-}
-
-void initFile(){
-  head = NULL;
-  last = NULL;
-  Data data;
-  FILE *f = fopen(DATABASE, "r");
-  while( fread(&data, sizeof(struct Data), 1, f) ){
-    Person* temp = (Person *)malloc(sizeof(Person));
-    temp->next = NULL;
-    temp->data = data;
-    saveAtLast(temp);
-  }
-  fclose(f);
-}
-
 int main(){
   bool flag = true;
   initFile();
@@ -718,6 +719,7 @@ int main(){
 
             }
           }
+          saveToFile();
         }
       }else if( function == 2 ){
 
